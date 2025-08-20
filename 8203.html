@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연산자</title>
+</head>
+<body>
+    
+<script>
+    let a = 10; //number형 값을 할당당
+    let b = 3;
+
+    console.log("덧셈 a + b : ", a + b);
+    console.log("뺄셈 a - b : ", a - b);
+    console.log("곱셈 a * b : ", a * b);
+    console.log("나눗셈 a / b : ", a / b);
+    console.log("나머지 a % b : ", a % b);
+
+    // let numTest01 = Number('123'); //123 문자 매개변수
+    // console.log("Number('123')호출", numTest01);//
+    // //문자형 (123)을 숫자형('123')으로 변환하는데 성공
+
+    // let numTest02 = Number(123); //123
+    // console.log("Number('123')호출", numTest02);//숫자->문자
+    // //숫자형 '123'을 문문자형(123)으로 변환하는데 성공
+
+    // let numTest03 = Number('123ABC'); //123 문자 매개변수수
+    // console.log("Number('123ABC')호출", numTest02);// Not a Number
+    // //문자명 '123ABC'를 숫자형 (123ABC)로 변환하는데 실패 사유 : ABC는 숫자형으로 강제변환이 불가능하기때문에 숫자가 아니라는 Not a number 출력력
+    
+
+    let numTest01 = Number('123'); //123 문자 매개변수
+    console.log("Number('123')호출", numTest01);//
+    //문자형 (123)을 숫자형('123')으로 변환하는데 성공
+    Boolean(123)
+    //성공시 true 출력력
+    //실패시 false 출력
+
+    let numTest02 = String(123); //123
+    console.log("String('123')호출", numTest02);//숫자->문자
+    // //숫자형 '123'을 문자형(123)으로 변환하는데 성공
+    Boolean('123')
+    //성공시 true 출력
+    //실패시 false 출력
+
+</script>
+
+</body>
+</html>
