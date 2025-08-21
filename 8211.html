@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연산자</title>
+</head>
+<body>
+    
+<script>
+    let a = 10; //number형 값을 할당당
+    let b = 3;
+
+    console.log("덧셈 a + b : ", a + b);
+    console.log("뺄셈 a - b : ", a - b);
+    console.log("곱셈 a * b : ", a * b);
+    console.log("나눗셈 a / b : ", a / b);
+    console.log("나머지 a % b : ", a % b);
+
+    console.log("a++ : ", a++); 
+    // a = 10; a 가 console.log 출력
+    // a = 11; a 가 +1 증가
+    // 증가연산자 a++ 의미 a = a + 1; a를 1증가시키고, 그 값을 a에 재할당
+    // 증가연산자 후위증가 (증가 -> (a) 사용 -> 구문실행 -> 증가)
+
+    console.log("a-- : ", a--);
+    // a = 11; a 가 console.log 출력
+    // a = 10; a 가 -1 감소
+    // 감소연산자 a-- 의미 a = a - 1; a를 1감소소시키고, 그 값을 a에 재할당
+    // 감소연산자 후위감소 (감소 -> (a) 사용 -> 구문실행 -> 감소)
+
+    // *** 값을 먼저 증가/감소 시키고 증가/감소된 값이 연산에 사용됨
+    console.log("++a : ", ++a);
+     // 증가연산자 전위증가 (증가 -> (a) 사용 -> 구문실행)
+
+    console.log("--a : ", --a);
+    // 감소연산자 전위감소 (감소 -> (a) 사용 -> 구문실행)
+    
+    // [퀴즈1]
+    console.log("===========[퀴즈1]===========");
+    let test1 = 0;
+
+    while(test1++ < 5){
+        // 1. test1 == 1
+        // 2. ++ : test1 = test1 + 1
+        // 3. <
+        // 4. 5
+        console.log("++test1 : ", test1) // test1 == 1, test1 == 2, test1 == 3, test1 == 4
+    }
+
+    // [퀴즈2]
+    console.log("===========[퀴즈1]===========");
+    let test2 = 0;
+
+    while(test2++ < 5){
+        // 1. test2 == 1
+        // 2. <
+        // 3. 5
+        // 4. ++ : test2 = test2 + 1
+        console.log("++test2 : ", test2) // test2 == 1, test2 == 2, test2 == 3, test2 == 4, test2 == 5
+    }
+
+    /* 할당 연산자 */
+    let x = 5; // 변수 x 에 5를 대입/할당
+
+    x = x + 3;
+    console.log("x 할당값 : ", x);
+
+    let y = 5; // 변수 y 에 5를 대입/할당
+
+    // y = y - 2;
+    y -= 2;
+    console.log("y 계산값 : ",y);
+
+    // z *= 5 -> z = z * 5
+    // q /= 5 -> q = q / 5
+let asd = 5;
+let qwe = "5";
+console.log(" asd = qwe : ", asd == qwe); // 문자 5 를 asd 변수에 재할당
+console.log(typeof asd); // 문자 5
+console.log(" asd == qwe : ", asd == qwe); // true (값만 비교)
+console.log(" asd === qwe : ", asd === qwe); // false (값, 타입 비교)
+console.log("asd != qwe : ", asd != qwe); // false (값만 비교)
+// num 숫자 5, qwe 문자 5 => true
+console.log("asd !== qwe : ", asd !== qwe); // true (값, 타입 비교)
+// num 숫자 5, qwe 문자 5 => false
+
+console.log("asd > 3 : ", asd > 3) // true
+console.log("asd < 3 : ", asd < 3) // false
+console.log("asd <= 3 : ", asd <= 3) // false
+console.log("asd >= 3 : ", asd >= 3) // true
+
+// 논리 연신자===============================================
+let a1 = true;
+let a2 = false;
+
+console.log("a1 && a2 : ", a1 && a2); // [AND] 둘다 true 일때 true
+console.log("a1 || a2 : ", a1 || a2); // [or] 둘중 하나라도 true 일때 true
+console.log("!a1 : ", !a1); // [NOT] 반대
+
+// 조건(삼항) 연산자==========================================
+let x1 = 10;
+let x2 = 20;
+
+let y1 = (x1 > x2) ? x1 : x2;
+// 조건(비교) ? true 면 실행 : false 면 실행
+
+//[퀴즈3]
+let age = 18;
+let age2 = (age >= 19) ? "성년" : "미성년";
+console.log("판정된 값은 : ", age2)
+
+
+    // let numTest01 = Number('123'); //123 문자 매개변수
+    // console.log("Number('123')호출", numTest01);//
+    // //문자형 (123)을 숫자형('123')으로 변환하는데 성공
+
+    // let numTest02 = Number(123); //123
+    // console.log("Number('123')호출", numTest02);//숫자->문자
+    // //숫자형 '123'을 문문자형(123)으로 변환하는데 성공
+
+    // let numTest03 = Number('123ABC'); //123 문자 매개변수수
+    // console.log("Number('123ABC')호출", numTest02);// Not a Number
+    // //문자명 '123ABC'를 숫자형 (123ABC)로 변환하는데 실패 사유 : ABC는 숫자형으로 강제변환이 불가능하기때문에 숫자가 아니라는 Not a number 출력력
+    
+
+    // let numTest01 = Number('123'); //123 문자 매개변수
+    // console.log("Number('123')호출", numTest01);//
+    // //문자형 (123)을 숫자형('123')으로 변환하는데 성공
+    // Boolean(123)
+    // //성공시 true 출력력
+    // //실패시 false 출력
+
+    // let numTest02 = String(123); //123
+    // console.log("String('123')호출", numTest02);//숫자->문자
+    // // //숫자형 '123'을 문자형(123)으로 변환하는데 성공
+    // Boolean('123')
+    // //성공시 true 출력
+    // //실패시 false 출력
+
+</script>
+
+</body>
+</html>
