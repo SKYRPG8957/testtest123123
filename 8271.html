@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>구구단 2단~9단</title>
+    <style>
+        
+        .wrap {
+            float: left;
+            width: 100%;
+            border: 1px solid;
+        }
+
+        .wrap::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .danlayout {
+            float: left;
+            border: 1px dotted #000;
+        }
+
+        .flexWrap {
+            margin-bottom: 20px;
+            border: 1px solid blue;
+            clear: both;
+            display: flex;
+        }
+
+        .flexlayout {
+            padding: 5px;
+            border: 1px dotted blue;
+        }
+
+        table {
+            float: left;
+            border-collapse: collapse;
+            border: 1px solid red;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        td {
+            border: 1px dotted red;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>table Case</h2>
+      <script>
+        document.write("<table><tr>");
+        for (let i = 2; i <= 9; i++) {
+            document.write("<td>");
+            for (let dan = 1; dan <= 9; dan++) {
+                document.write(`${i} x ${dan} = ${i * dan}<br>`);
+            }
+            document.write("</td>");
+
+        }
+        document.write("</tr></table>");
+    </script>
+    <h2>class Case</h2>
+    <script>
+        document.write("<div class='flexWrap'>");
+        for (let i = 2; i <= 9; i++) {
+            document.write("<div class='flexlayout'>");
+            for (let dan = 1; dan <= 9; dan++) {
+                document.write(`${i} x ${dan} = ${i * dan}<br>`);
+            }
+            document.write("</div>");
+
+        }
+        document.write("</div>");
+    </script>
+    <h2>floating Case</h2>
+    <script>
+        document.write("<div class='wrap'>");
+        for (let i = 2; i <= 9; i++) {
+            document.write("<div class='danlayout'>");
+            for (let dan = 1; dan <= 9; dan++) {
+                document.write(`${i} x ${dan} = ${i * dan}<br>`);
+            }
+            document.write("</div>");
+
+        }
+        document.write("</div>");
+    </script>
+</body>
+
+</html>
