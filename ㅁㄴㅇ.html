@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>AI 멀티 캐릭터 채팅</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body {
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .app-container {
+      width: 90vw;
+      height: 90vh;
+      background: #fff;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      display: flex;
+      overflow: hidden;
+    }
+    /* ===== 왼쪽 사이드바 ===== */
+    .sidebar {
+      width: 250px;
+      background-color: #2c3e50;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      overflow-y: auto;
+    }
+    .sidebar h3 {
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .character-list {
+      flex: 1;
+      overflow-y: auto;
+    }
+    .character-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px;
+      margin-bottom: 6px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .character-item:hover {
+      background-color: #34495e;
+    }
+    .character-item img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .character-name {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .add-character-btn {
+      margin-top: 10px;
+      padding: 10px;
+      border: none;
+      background-color: #4a90e2;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .add-character-btn:hover {
+      background-color: #357abd;
+    }
+    /* ===== 오른쪽 채팅 영역 ===== */
+    .chat-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #4a90e2;
+      padding: 12px 16px;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+    }
+    .chat-box {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background-color: #fefefe;
+      font-size: 16px;
+    }
+    .message {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .message img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .msg-content {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+    .user .msg-content { background-color: #dbe8ff; color: #1a73e8; }
+    .assistant .msg-content { background-color: #f1f1f1; color: #333; }
+    .input-box {
+      display: flex;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-top: 1px solid #ddd;
+    }
+    .input-box input {
+      flex: 1;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+    .input-box button {
+      margin-left: 8px;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .input-box button:hover { background-color: #357abd; }
+    /* ===== 초기 설정 모달 ===== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      width: 400px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .modal-content input, .modal-content textarea {
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .modal-content button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 15px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .modal-content button:hover {
+      background-color: #357abd;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- 왼쪽 사이드바 -->
+    <div class="sidebar">
+      <h3>캐릭터 목록</h3>
+      <div id="character-list" class="character-list"></div>
+      <button class="add-character-btn" onclick="openCharacterModal()">＋ 캐릭터 추가</button>
+    </div>
+
+    <!-- 오른쪽 채팅 영역 -->
+    <div class="chat-area">
+      <header id="chat-header">AI 멀티 캐릭터 채팅</header>
+      <div id="chat-box" class="chat-box"></div>
+      <div class="input-box">
+        <input id="user-input" type="text" placeholder="메시지를 입력하세요..." />
+        <button onclick="sendMessage()">전송</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 캐릭터 생성 모달 -->
+  <div id="setup-modal" class="modal">
+    <div class="modal-content">
+      <h3>AI 캐릭터 생성</h3>
+      <input id="api-key" type="password" placeholder="Hugging Face API 키" />
+      <input id="char-name" type="text" placeholder="캐릭터 이름" />
+      <input id="char-img" type="file" accept="image/*" />
+      <textarea id="char-prompt" rows="3" placeholder="캐릭터 프롬프트"></textarea>
+      <button onclick="saveCharacter()">추가</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chat-box");
+    const chatHeader = document.getElementById("chat-header");
+    const userInput = document.getElementById("user-input");
+    const characterList = document.getElementById("character-list");
+
+    let apiKey = localStorage.getItem("HF_API_KEY") || "";
+    let characters = JSON.parse(localStorage.getItem("CHARACTERS") || "[]");
+    let activeCharacterIndex = localStorage.getItem("ACTIVE_CHARACTER") || null;
+
+    const modal = document.getElementById("setup-modal");
+
+    function openCharacterModal() {
+      modal.style.display = "flex";
+    }
+
+    function saveCharacter() {
+      apiKey = document.getElementById("api-key").value.trim();
+      const name = document.getElementById("char-name").value.trim();
+      const prompt = document.getElementById("char-prompt").value.trim();
+      const imgFile = document.getElementById("char-img").files[0];
+
+      if (!apiKey || !name || !prompt) {
+        alert("모든 항목을 입력하세요!");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const newCharacter = {
+          name,
+          prompt,
+          img: event.target.result,
+          history: []
+        };
+
+        characters.push(newCharacter);
+        activeCharacterIndex = characters.length - 1;
+
+        localStorage.setItem("HF_API_KEY", apiKey);
+        localStorage.setItem("CHARACTERS", JSON.stringify(characters));
+        localStorage.setItem("ACTIVE_CHARACTER", activeCharacterIndex);
+
+        modal.style.display = "none";
+        renderCharacterList();
+        renderChat();
+      };
+
+      if (imgFile) reader.readAsDataURL(imgFile);
+      else {
+        const newCharacter = {
+          name,
+          prompt,
+          img: "",
+          history: []
+        };
+        characters.push(newCharacter);
+        activeCharacterIndex = characters.length - 1;
+
+        localStorage.setItem("HF_API_KEY", apiKey);
+        localStorage.setItem("CHARACTERS", JSON.stringify(characters));
+        localStorage.setItem("ACTIVE_CHARACTER", activeCharacterIndex);
+
+        modal.style.display = "none";
+        renderCharacterList();
+        renderChat();
+      }
+    }
+
+    function renderCharacterList() {
+      characterList.innerHTML = "";
+      characters.forEach((char, idx) => {
+        const item = document.createElement("div");
+        item.className = "character-item";
+        item.onclick = () => switchCharacter(idx);
+
+        const img = document.createElement("img");
+        img.src = char.img || "https://via.placeholder.com/40";
+
+        const name = document.createElement("div");
+        name.className = "character-name";
+        name.textContent = char.name;
+
+        item.appendChild(img);
+        item.appendChild(name);
+        characterList.appendChild(item);
+      });
+    }
+
+    function switchCharacter(idx) {
+      activeCharacterIndex = idx;
+      localStorage.setItem("ACTIVE_CHARACTER", activeCharacterIndex);
+      renderChat();
+    }
+
+    function renderChat() {
+      chatBox.innerHTML = "";
+      if (activeCharacterIndex === null || !characters[activeCharacterIndex]) {
+        chatHeader.textContent = "AI 멀티 캐릭터 채팅";
+        return;
+      }
+
+      const char = characters[activeCharacterIndex];
+      chatHeader.textContent = `${char.name}와 대화 중`;
+
+      char.history.forEach(msg => appendMessage(msg.role, msg.content));
+    }
+
+    function appendMessage(role, text) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", role);
+
+      const img = document.createElement("img");
+      img.src = role === "assistant"
+        ? characters[activeCharacterIndex]?.img || "https://via.placeholder.com/40"
+        : "https://via.placeholder.com/40";
+
+      const content = document.createElement("div");
+      content.classList.add("msg-content");
+      content.textContent = text;
+
+      msg.appendChild(img);
+      msg.appendChild(content);
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const message = userInput.value.trim();
+      if (!message || activeCharacterIndex === null) return;
+
+      const char = characters[activeCharacterIndex];
+      appendMessage("user", message);
+      userInput.value = "";
+      appendMessage("assistant", "⏳ 답변 생성 중...");
+
+      try {
+        const response = await fetch(`https://api-inference.huggingface.co/models/snunlp/KR-SOLAR-10.7B-v1.0`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${apiKey}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            inputs: `${char.prompt}\n사용자: ${message}\nAI:`
+          })
+        });
+
+        if (!response.ok) throw new Error(`HTTP 오류: ${response.status}`);
+        const data = await response.json();
+
+        const reply = data[0]?.generated_text
+          ?.replace(`${char.prompt}\n사용자: ${message}\nAI:`, "")
+          .trim() || "⚠ 답변을 가져올 수 없습니다.";
+
+        const lastMsg = chatBox.querySelectorAll(".assistant .msg-content");
+        lastMsg[lastMsg.length - 1].textContent = reply;
+
+        char.history.push({ role: "user", content: message });
+        char.history.push({ role: "assistant", content: reply });
+        localStorage.setItem("CHARACTERS", JSON.stringify(characters));
+
+      } catch (error) {
+        const lastMsg = chatBox.querySelectorAll(".assistant .msg-content");
+        lastMsg[lastMsg.length - 1].textContent = "⚠ 오류: " + error.message;
+      }
+    }
+
+    renderCharacterList();
+    renderChat();
+  </script>
+</body>
+</html>
