@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="shortcut icon" type="image/x-icon" href="resources/img/guide/favicon.ico">
+    <link rel="icon" type="image/png" sizes="200x200" href="resources/img/guide/favicon_200.png">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="apple-touch-icon" sizes="180x180" href="resources/img/guide/favicon_180.png">
+	<link rel="icon" type="image/png" sizes="512x512" href="resources/img/guide/favicon_512.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="resources/img/guide/favicon_192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="resources/img/guide/favicon_32.png">
+	<title>메인3-2 - KRDS</title>
+	<link href="resources/css/swiper-bundle.min.css" type="text/css" rel="stylesheet" />
+	<link href="resources/css/pattern_css.css" type="text/css" rel="stylesheet" />
+	<!-- Bootstrap 5 CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>수원특례시청</title>
+    <!-- <link href="resources/css/pattern.css" type="text/css" rel="stylesheet" /> -->
+    <style>
+        /* iframe 스타일링 */
+        #header-frame,
+        #footer-frame {
+            width: 100%;
+            border: none;
+            display: block;
+            overflow: hidden;
+        }
+
+        #header-frame {
+            height: 200px;
+            /* 헤더 높이에 맞게 조정 */ 
+        }
+
+        #footer-frame {
+            height: 400px;
+            /* 푸터 높이에 맞게 조정 */
+        }
+    </style>
+    <script>
+        // iframe 높이 자동 조절
+        function resizeIframe(iframe) {
+            iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+        }
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+
+        <!-- 헤더 iframe -->
+        <iframe id="header-frame" src="header.html" onload="resizeIframe(this)" scrolling="no"></iframe>
+
+        <!-- 컨테이너 영역 -->
+        <div id="container" style="height: 500px;">
+            <div class="inner">
+<!-- 새빛 정책 사진 갤러리 섹션 (Bootstrap 5) -->
+			<section class="py-5 bg-light">
+				<div class="container">
+					<!-- 섹션 타이틀 -->
+					<div class="text-center mb-5">
+						<h2 class="fw-bold mb-2">새빛 정책</h2>
+						<p class="text-muted">국민과 함께하는 새로운 정책 소식을 전합니다</p>
+					</div>
+
+					<!-- Bootstrap Card Grid -->
+					<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+						<!-- 카드 1 -->
+						<div class="col">
+							<div class="card h-100 shadow-sm border-0">
+								<div class="position-relative">
+									<img src="resources/img/pattern/sample/sample_main_news_thum1.jpg"
+										class="card-img-top" alt="정책 이미지 1">
+									<span class="badge bg-primary position-absolute top-0 start-0 m-2">신규</span>
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">국민 건강증진 정책 안내</h5>
+									<p class="card-text text-muted">건강하고 행복한 삶을 위한 다양한 건강증진 프로그램을 소개합니다.</p>
+								</div>
+								<div class="card-footer bg-white border-0">
+									<small class="text-muted">2025.12.10</small>
+								</div>
+							</div>
+						</div>
+
+						<!-- 카드 2 -->
+						<div class="col">
+							<div class="card h-100 shadow-sm border-0">
+								<div class="position-relative">
+									<img src="resources/img/pattern/sample/sample_main_news_thum2.jpg"
+										class="card-img-top" alt="정책 이미지 2">
+									<span class="badge bg-success position-absolute top-0 start-0 m-2">진행중</span>
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">사회복지 지원 확대 방안</h5>
+									<p class="card-text text-muted">취약계층을 위한 맞춤형 복지 서비스 제공 계획을 알려드립니다.</p>
+								</div>
+								<div class="card-footer bg-white border-0">
+									<small class="text-muted">2025.12.08</small>
+								</div>
+							</div>
+						</div>
+
+						<!-- 카드 3 -->
+						<div class="col">
+							<div class="card h-100 shadow-sm border-0">
+								<div class="position-relative">
+									<img src="resources/img/pattern/sample/sample_img_total_thum1.jpg"
+										class="card-img-top" alt="정책 이미지 3">
+									<span
+										class="badge bg-warning text-dark position-absolute top-0 start-0 m-2">예정</span>
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">디지털 행정 서비스 개선</h5>
+									<p class="card-text text-muted">더 편리하고 빠른 온라인 민원 서비스를 제공하기 위한 계획입니다.</p>
+								</div>
+								<div class="card-footer bg-white border-0">
+									<small class="text-muted">2025.12.05</small>
+								</div>
+							</div>
+						</div>
+
+						<!-- 카드 4 -->
+						<div class="col">
+							<div class="card h-100 shadow-sm border-0">
+								<div class="position-relative">
+									<img src="resources/img/pattern/sample/sample_img_total_thum2.jpg"
+										class="card-img-top" alt="정책 이미지 4">
+									<span class="badge bg-secondary position-absolute top-0 start-0 m-2">완료</span>
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">국민 참여 소통 강화</h5>
+									<p class="card-text text-muted">국민 여러분의 의견을 반영하는 열린 정부 실현을 위해 노력합니다.</p>
+								</div>
+								<div class="card-footer bg-white border-0">
+									<small class="text-muted">2025.12.01</small>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 더보기 버튼 -->
+					<div class="text-center mt-5">
+						<a href="#" class="btn btn-primary btn-lg">
+							더 많은 정책 보기
+							<i class="bi bi-arrow-right ms-2"></i>
+						</a>
+					</div>
+				</div>
+			</section>
+            </div>
+        </div>
+
+        <!-- 푸터 iframe -->
+        <iframe id="footer-frame" src="footer.html" onload="resizeIframe(this)" scrolling="no"></iframe>
+    </div>
+
+    <!-- 스크립트 : 라이브러리 -->
+    <script src="resources/js/pattern/jquery.min.js"></script>
+
+    <!-- 스크립트 : 패턴 페이지 -->
+
+    <script src="resources/js/pattern/ui-pattern-script.js"></script>
+
+
+    <!-- 스크립트 : 컴포넌트 -->
+    <script src="resources/js/component/ui-script.js"></script>
+</body>
+
+</html>
